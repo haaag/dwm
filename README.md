@@ -9,17 +9,20 @@
 * [dwm-titlecolor-20190206-6.2.diff](https://dwm.suckless.org/patches/titlecolor/)
 
 # bar scripts
-* dwm_bar.sh
-* dwm_battery.sh
-* dwm_bluetooth.sh
-* dwm_cpu.sh
-* dwm_date.sh
-* dwm_mail.sh
-* dwm_neomutt.sh
-* dwm_nettraf.sh
-* dwm_pulse.sh
-* dwm_rofi_bluetooth.sh
-* dwm_temppercore.sh
-* dwm_updates_arch.sh
-* dwm_volume.sh
-* dwm_weather.sh (Ignored)
+```
+scripts/
+├── dwm_bar.sh
+├── dwm_battery.sh
+├── dwm_bluetooth.sh
+├── dwm_cpu.sh
+├── dwm_date.sh
+├── dwm_mail.sh
+├── dwm_neomutt.sh
+├── dwm_nettraf.sh
+├── dwm_pulse.sh
+├── dwm_rofi_bluetooth.sh
+├── dwm_temppercore.sh
+├── dwm_updates_arch.sh
+├── dwm_volume.sh
+└── dwm_weather.sh (Ignored)
+```
