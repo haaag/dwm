@@ -1,5 +1,6 @@
 # dwm
-.
+```
+patches/
 ├── dwm-alwayscenter-20200625-f04cac6.diff
 ├── dwm-attachabove-6.2-20200421.diff
 ├── dwm-autostart-20210120-cb3f58a.diff
@@ -16,3 +17,4 @@
 ├── dwm-stickyindicator-6.2.diff
 ├── dwm-swallow-20201211-61bb8b2.diff
 └── dwm-titlecolor-20190206-6.2.diff
+```
