@@ -18,20 +18,40 @@ static const Bool viewontag         = True;     /* Switch view on tag switch */
 // static const char *fonts[]          = { "Iosevka:size=10", "Material:size=12", "FontAwesome:size=11", "Font Awesome 5 Free:size=11"};
 static const char *fonts[]          = { "RobotoMono Nerd Font:size=10", "Material:size=12", "FontAwesome:size=11", "Font Awesome 5 Free:size=11"};
 static const char dmenufont[]       = "monospace:size=10";
-static const char col_gray1[]       = "#1f2335";
+// TokyoNight
+/* static const char col_gray1[]       = "#1f2335";
 static const char col_gray2[]       = "#414868";
 static const char col_gray3[]       = "#a9b1d6";
 static const char col_gray4[]       = "#c0caf5";
 static const char col_cyan[]        = "#4abaaf";
-static const char col_background[]  = "#24283b";
+static const char col_background[]  = "#24283b"; */
+// Gruvbox
+/* static const char col_gray1[]       = "#1f2335";
+static const char col_gray2[]       = "#a89984";
+static const char col_gray3[]       = "#bdae93";
+static const char col_gray4[]       = "#d5c4a1";
+static const char col_cyan[]        = "#458588";
+static const char col_organge[]     = "#d65d0e";
+static const char col_background[]  = "#32302f"; */
+//
+// Gruvbox
+static const char col_gray1[]       = "#89b482";
+static const char col_gray2[]       = "#a89984";
+static const char col_gray3[]       = "#bdae93";
+static const char col_gray4[]       = "#d4be98";
+static const char col_cyan[]        = "#32302f";
+static const char col_red[]         = "#ea6962";
+static const char col_background[]  = "#1D2021";
+//
 static const unsigned int baralpha  = 0xd0;
 static const unsigned int borderalpha = OPAQUE;
 static const char *colors[][3]      = {
-	/*               fg         bg         border   */
-	[SchemeNorm]  = { col_gray3, col_gray1, col_gray2 },
-	[SchemeSel]   = { col_cyan, col_gray2,  col_cyan  },
-	[SchemeTitle] = { col_cyan, col_gray1,  col_gray1  },
+	/*                    fg          bg         border   */
+	[SchemeNorm]  = { col_gray3,  col_background,   col_gray2 },
+	[SchemeSel]   = { col_gray1,  col_cyan,         col_gray1  },
+	[SchemeTitle] = { col_cyan,   col_background,   col_gray1  },
 	// [SchemeSel]  = { col_cyan, col_background,  col_background  },
+	// TokyoNight [SchemeSel]   = { col_cyan, col_gray1,  col_cyan  },
 };
 
 static const unsigned int alphas[][3]      = {
@@ -117,7 +137,7 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_background, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 // static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 // static const char *filecmd[]  = { "pcmanfm", NULL };
 // static const char *taskmanager[]  = { "xfce4-taskmanager", NULL };
@@ -130,7 +150,7 @@ static const char *rofi_run[]  = { "rofi", "-width", "300", "-lines", "10", "-sh
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
-	{ MODKEY,                       XK_r,      spawn,          {.v = dmenucmd } },
+	// { MODKEY,                       XK_r,      spawn,          {.v = dmenucmd } },
 	{ MODKEY|ShiftMask,             XK_r,      spawn,          {.v = rofi_run } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = terminal } },
 	{ MODKEY|ShiftMask,             XK_Return, zoom,           {0} },
