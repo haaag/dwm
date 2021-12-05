@@ -5,6 +5,10 @@
 #define TERMINAL "kitty"
 
 /* appearance */
+// static const unsigned int ulinepad	= 5;	    /* horizontal padding between the underline and tag */
+// static const unsigned int ulinestroke	= 2;	/* thickness / height of the underline */
+// static const unsigned int ulinevoffset	= 0;	/* how far above the bottom of the bar the line should appear */
+// static const int ulineall 		= 0;	        /* 1 to show underline on all tags, 0 for just the active ones */
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
 static const unsigned int gappx     = 5;        /* gaps between windows */
 static const unsigned int snap      = 32;       /* snap pixel */
@@ -19,12 +23,13 @@ static const Bool viewontag         = True;     /* Switch view on tag switch */
 static const char *fonts[]          = { "RobotoMono Nerd Font:size=10", "Material:size=12", "FontAwesome:size=11", "Font Awesome 5 Free:size=11"};
 static const char dmenufont[]       = "monospace:size=10";
 // TokyoNight
-/* static const char col_gray1[]       = "#1f2335";
-static const char col_gray2[]       = "#414868";
-static const char col_gray3[]       = "#a9b1d6";
-static const char col_gray4[]       = "#c0caf5";
-static const char col_cyan[]        = "#4abaaf";
-static const char col_background[]  = "#24283b"; */
+// static const char col_gray1[]       = "#1f2335";
+// static const char col_gray2[]       = "#414868";
+// static const char col_gray3[]       = "#a9b1d6";
+// static const char col_gray4[]       = "#c0caf5";
+// static const char col_cyan[]        = "#4abaaf";
+// static const char col_background[]  = "#24283b";
+
 // Gruvbox
 /* static const char col_gray1[]       = "#1f2335";
 static const char col_gray2[]       = "#a89984";
@@ -35,23 +40,35 @@ static const char col_organge[]     = "#d65d0e";
 static const char col_background[]  = "#32302f"; */
 //
 // Gruvbox
-static const char col_gray1[]       = "#89b482";
+/* static const char col_gray1[]       = "#89b482";
 static const char col_gray2[]       = "#a89984";
 static const char col_gray3[]       = "#bdae93";
 static const char col_gray4[]       = "#d4be98";
 static const char col_cyan[]        = "#32302f";
 static const char col_red[]         = "#ea6962";
 static const char col_background[]  = "#1D2021";
+// */
+// Catppuccin
+static const char col_gray1[]       = "#B3E1A3";
+static const char col_gray2[]       = "#D7DAE0";
+static const char col_gray3[]       = "#D7DAE0";
+static const char col_gray4[]       = "#C6AAE8";
+static const char col_cyan[]        = "#1E1E28";
+static const char col_red[]         = "#E28C8C";
+static const char col_background[]  = "#1E1E28";
 //
 static const unsigned int baralpha  = 0xd0;
 static const unsigned int borderalpha = OPAQUE;
-static const char *colors[][3]      = {
-	/*                    fg          bg         border   */
-	[SchemeNorm]  = { col_gray3,  col_background,   col_gray2 },
-	[SchemeSel]   = { col_gray1,  col_cyan,         col_gray1  },
-	[SchemeTitle] = { col_cyan,   col_background,   col_gray1  },
+static const char *colors[][3] = {
+	/*                    fg                bg            border   */
+	[SchemeNorm]  = { col_gray3,    col_background,     col_gray2   },
+	[SchemeSel]   = { col_gray1,    col_cyan,           col_gray1   },
+    [SchemeTitle] = { col_cyan,     col_background,     col_gray1   },
+
+    // [SchemeSel]   = { col_cyan,     col_gray1,          col_cyan  },
+	// Gruvbox[SchemeTitle] = { col_cyan,   col_background,   col_gray1  },
+    // TokyoNight
 	// [SchemeSel]  = { col_cyan, col_background,  col_background  },
-	// TokyoNight [SchemeSel]   = { col_cyan, col_gray1,  col_cyan  },
 };
 
 static const unsigned int alphas[][3]      = {
@@ -77,6 +94,8 @@ static Sp scratchpads[] = {
 	{"pulsemixer",   	spcmd3},
 };
 /* tagging */
+/*    */
+// static const char *tags[] = { "a", "s", "d", "f", "z", "x", "c", "v" };
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8" };
 // static const char *tags[] = {"", "", "", "", "", "", "", "", };
 /* static const char *tags[] = { "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX" }; */
@@ -93,17 +112,17 @@ static const Rule rules[] = {
 	{ "firefox",            NULL,       	NULL,               1,        	      0,            -1, 				                 },
 	{ "Brave-browser",      NULL,       	NULL,               1,        	      0,            -1, 				                 },
 	{ "Navigator",          NULL,       	NULL,               0,        	      0,            -1, 				                 },
-	{ "TelegramDesktop",    NULL,         NULL,          1 << 6,                0,            -1, 				                 },
-	{ "Signal",             NULL,         NULL,          1 << 6,                0,            -1, 				                 },
-	{ "tidal-hifi",       "tidal-hifi", 	"tidal-hifi",  1 << 3,                0,            -1,                          },
-	{ "Galculator",       "galculator", 	"galculator",       0,                1,            -1,      1612,773,306,305,  1},
-	{ "Gucharmap",          NULL,         NULL,               0,                1,            -1,      381,221,1101,709,  1},
-	{ "mpv",                NULL,         NULL,               0,                1,            -1,       450,208,958,539,  1},
-	{ "spterm",           "spterm",       NULL,        SPTAG(0),                1,            -1,         50,50,500,500,  1},
-	{ "spipython",        "spipython",    NULL,        SPTAG(1),                1,            -1,      1325,134,593,944,  1},
-	{ "pulsemixer",       "pulsemixer",   NULL,        SPTAG(2),                1,            -1,       1081,20,837,202,  1},
-	{ "spipython2",       "spipython2",   NULL,        SPTAG(3),                1,            -1,      1325,134,593,944,  1},
-	{ "Sxiv",               NULL,       	NULL,          	    0,                1,         	  -1,      1079,424,839,654,  1}
+	{ "TelegramDesktop",    NULL,           NULL,          1 << 6,                0,            -1, 				                 },
+	{ "Signal",             NULL,           NULL,          1 << 6,                0,            -1, 				                 },
+	{ "tidal-hifi",       "tidal-hifi", 	"tidal-hifi",  1 << 3,                0,            -1,                                  },
+	{ "Galculator",       "galculator", 	"galculator",       0,                1,            -1,              1612,773,306,305,  1},
+	{ "Gucharmap",          NULL,           NULL,               0,                1,            -1,              381,221,1101,709,  1},
+	{ "mpv",                NULL,           NULL,               0,                1,            -1,               450,208,958,539,  1},
+	{ "spterm",           "spterm",         NULL,        SPTAG(0),                1,            -1,                 50,50,500,500,  1},
+	{ "spipython",        "spipython",      NULL,        SPTAG(1),                1,            -1,              1325,134,593,944,  1},
+	{ "pulsemixer",       "pulsemixer",     NULL,        SPTAG(2),                1,            -1,               1081,20,837,202,  1},
+	{ "spipython2",       "spipython2",     NULL,        SPTAG(3),                1,            -1,              1325,134,593,944,  1},
+	{ "Sxiv",               NULL,       	NULL,          	    0,                1,         	  -1,            1079,424,839,654,  1}
 };
 
 /* layout(s) */
@@ -138,9 +157,6 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_background, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
-// static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
-// static const char *filecmd[]  = { "pcmanfm", NULL };
-// static const char *taskmanager[]  = { "xfce4-taskmanager", NULL };
 static const char *terminal[]  = { "kitty", NULL };
 static const char *rofi_run[]  = { "rofi", "-width", "300", "-lines", "10", "-show", "run", NULL };
 
@@ -179,7 +195,8 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
 	{ MODKEY,                       XK_comma,  focusmon,       {.i = -1 } },
 	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
-	{ MODKEY,                       XK_F11,    togglescratch,  {.ui = 1 } },
+	// { MODKEY,                       XK_F11,    togglescratch,  {.ui = 1 } },
+	{ MODKEY,                       XK_F11,    togglescratch,  {.ui = 0 } },
 	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_r,      self_restart,   {0} },
