@@ -1,6 +1,3 @@
-/* See LICENSE file for copyright and license details. */
-
-
 /* Constants */
 #define TERMINAL "kitty"
 
@@ -15,21 +12,23 @@ static const unsigned int snap      = 32;       /* snap pixel */
 static const unsigned int systraypinning = 0;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
 static const unsigned int systrayspacing = 2;   /* systray spacing */
 static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor*/
-static const int showsystray        = 0;        /* 0 means no systray */
+static const int showsystray        = 1;        /* 0 means no systray */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const Bool viewontag         = True;     /* Switch view on tag switch */
-// static const char *fonts[]          = { "Iosevka:size=10", "Material:size=12", "FontAwesome:size=11", "Font Awesome 5 Free:size=11"};
 static const char *fonts[]          = { "RobotoMono Nerd Font:size=10", "Material:size=12", "FontAwesome:size=11", "Font Awesome 5 Free:size=11"};
 static const char dmenufont[]       = "monospace:size=10";
-// TokyoNight
-// static const char col_gray1[]       = "#1f2335";
-// static const char col_gray2[]       = "#414868";
-// static const char col_gray3[]       = "#a9b1d6";
-// static const char col_gray4[]       = "#c0caf5";
-// static const char col_cyan[]        = "#4abaaf";
-// static const char col_background[]  = "#24283b";
+// static const char *fonts[]          = { "Iosevka:size=10", "Material:size=12", "FontAwesome:size=11", "Font Awesome 5 Free:size=11"};
 
+// TokyoNight {{{
+static const char col_gray1[]       = "#4abaaf";
+static const char col_gray2[]       = "#414868";
+static const char col_gray3[]       = "#a9b1d6";
+static const char col_gray4[]       = "#c0caf5";
+// static const char col_cyan[]        = "#4abaaf";
+static const char col_cyan[]        = "#1f2335";
+static const char col_background[]  = "#24283b";
+// }}}
 // Gruvbox
 /* static const char col_gray1[]       = "#1f2335";
 static const char col_gray2[]       = "#a89984";
@@ -48,7 +47,7 @@ static const char col_cyan[]        = "#32302f";
 static const char col_red[]         = "#ea6962";
 static const char col_background[]  = "#1D2021";
 // */
-// Catppuccin
+/* // Catppuccin
 static const char col_gray1[]       = "#B3E1A3";
 static const char col_gray2[]       = "#D7DAE0";
 static const char col_gray3[]       = "#D7DAE0";
@@ -56,7 +55,27 @@ static const char col_gray4[]       = "#C6AAE8";
 static const char col_cyan[]        = "#1E1E28";
 static const char col_red[]         = "#E28C8C";
 static const char col_background[]  = "#1E1E28";
-//
+// */
+/* // Onedark
+static const char col_gray1[]       = "#98C379";
+static const char col_gray2[]       = "#ABB2BF";
+static const char col_gray3[]       = "#ABB2BF";
+static const char col_gray4[]       = "#C678DD";
+static const char col_cyan[]        = "#282C34";
+static const char col_red[]         = "#E06C75";
+static const char col_background[]  = "#282C34";
+// */
+/* // rose-pine
+// static const char col_gray1[]       = "#31748f";
+static const char col_gray1[]       = "#9ccfd8";
+static const char col_gray2[]       = "#6e6a86";
+static const char col_gray3[]       = "#6e6a86";
+static const char col_gray4[]       = "#c4a7e7";
+static const char col_cyan[]        = "#191724";
+static const char col_red[]         = "#eb6f92";
+static const char col_background[]  = "#191724";
+// static const char col_cyan[]        = "#9ccfd8";
+// */
 static const unsigned int baralpha  = 0xd0;
 static const unsigned int borderalpha = OPAQUE;
 static const char *colors[][3] = {
@@ -64,11 +83,6 @@ static const char *colors[][3] = {
 	[SchemeNorm]  = { col_gray3,    col_background,     col_gray2   },
 	[SchemeSel]   = { col_gray1,    col_cyan,           col_gray1   },
     [SchemeTitle] = { col_cyan,     col_background,     col_gray1   },
-
-    // [SchemeSel]   = { col_cyan,     col_gray1,          col_cyan  },
-	// Gruvbox[SchemeTitle] = { col_cyan,   col_background,   col_gray1  },
-    // TokyoNight
-	// [SchemeSel]  = { col_cyan, col_background,  col_background  },
 };
 
 static const unsigned int alphas[][3]      = {
@@ -128,7 +142,7 @@ static const Rule rules[] = {
 /* layout(s) */
 static const float mfact     = 0.50; /* factor of master area size [0.05..0.95] */
 static const int nmaster     = 1;    /* number of clients in master area */
-static const int resizehints = 1;    /* 1 means respect size hints in tiled resizals */
+static const int resizehints = 0;    /* 1 means respect size hints in tiled resizals */
 
 #include "layouts.c"
 

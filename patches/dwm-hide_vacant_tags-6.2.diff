@@ -30,7 +30,7 @@ index 4465af1..c4aa3de 100644
  			arg.ui = 1 << i;
 @@ -709,19 +714,19 @@ drawbar(Monitor *m)
  	}
- 
+
  	for (c = m->clients; c; c = c->next) {
 -		occ |= c->tags;
 +		occ |= c->tags == 255 ? 0 : c->tags;
