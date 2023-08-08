@@ -27,9 +27,19 @@ static const Rule rules[] = {
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-	/* class      instance    title       tags mask     isfloating   monitor */
-	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
-	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
+	/* class              instance        title               tags mask     isfloating   monitor */
+  { "Gimp",             NULL,           NULL,               0,            1,           -1 },
+  { "Firefox",          NULL,           NULL,               1 << 8,       0,           -1 },
+  { "TelegramDesktop",  NULL,           NULL,               1 << 6,       0,           -1 },
+  { "Signal",           NULL,           NULL,               1 << 6,       0,            -1 },
+  { "mpv",              NULL,           NULL,               1 << 5,       0,            -1 },
+  { "tidal-hifi",       "tidal-hifi", 	"tidal-hifi",       1 << 3,       0,            -1 },
+  { "Galculator",       "galculator", 	"galculator",       0,            1,            -1 },
+  { "Gucharmap",        NULL,           NULL,               0,            1,            -1 },
+  { "Peek",             "peek",         NULL,               0,            1,            -1 },
+  { "Tk",               "tk",           NULL,               0,            1,            -1 },
+  { "Sxiv",             NULL,           NULL,               0,            1,            -1 },
+  { "Nsxiv",            NULL,           NULL,               0,            1,            -1 },
 };
 
 /* layout(s) */
@@ -66,6 +76,8 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
+	{ MODKEY|ShiftMask,             XK_k,      rotatestack,    {.i = -1 } },
+	{ MODKEY|ShiftMask,             XK_j,      rotatestack,    {.i = +1 } },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
 	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
