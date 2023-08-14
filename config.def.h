@@ -24,8 +24,10 @@ static char selbordercolor[]        = "#005577";
 static char selbgcolor[]            = "#005577";
 static char *colors[][3] = {
        /*               fg           bg           border   */
-       [SchemeNorm] = { normfgcolor, normbgcolor, normbordercolor },
-       [SchemeSel]  = { selfgcolor,  selbgcolor,  selbordercolor  },
+    [SchemeNorm] = { normfgcolor, normbgcolor, normbordercolor },
+    [SchemeSel]  = { selfgcolor,  selbgcolor,  selbordercolor  },
+    [SchemeScratchSel]  = { selfgcolor, selbgcolor,  selbordercolor  },
+    [SchemeScratchNorm] = { selfgcolor, selbgcolor,  normbordercolor },
 };
 static const unsigned int alphas[][3]      = {
     /*               fg      bg        border*/
@@ -41,20 +43,22 @@ static const Rule rules[] = {
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-	/* class              instance        title           tags mask     isfloating   monitor */
-  { "Gimp",             NULL,           NULL,               0,            1,            -1 },
-  { "Firefox",          NULL,           NULL,               1 << 8,       0,            -1 },
-  { "Tor Browser",      NULL,           NULL,               1 << 7,       0,            -1 },
-  { "TelegramDesktop",  NULL,           NULL,               1 << 6,       0,            -1 },
-  { "Signal",           NULL,           NULL,               1 << 6,       0,            -1 },
-  { "mpv",              NULL,           NULL,               1 << 5,       0,            -1 },
-  { "tidal-hifi",       "tidal-hifi", 	"tidal-hifi",       1 << 3,       0,            -1 },
-  { "Galculator",       "galculator", 	"galculator",       0,            1,            -1 },
-  { "Gucharmap",        NULL,           NULL,               0,            1,            -1 },
-  { "Peek",             "peek",         NULL,               0,            1,            -1 },
-  { "Tk",               "tk",           NULL,               0,            1,            -1 },
-  { "Sxiv",             NULL,           NULL,               0,            1,            -1 },
-  { "Nsxiv",            NULL,           NULL,               0,            1,            -1 },
+	/* class           instance         title           tags mask  isfloating  monitor  scratch key */
+    { "Gimp",             NULL,           NULL,             0,         1,           -1,       0  },
+    { "Firefox",          NULL,           NULL,             1 << 8,    0,           -1,       0  },
+    { "Tor Browser",      NULL,           NULL,             1 << 7,    0,           -1,       0  },
+    { "TelegramDesktop",  NULL,           NULL,             1 << 6,    0,           -1,       0  },
+    { "Signal",           NULL,           NULL,             1 << 6,    0,           -1,       0  },
+    { "mpv",              NULL,           NULL,             1 << 5,    0,           -1,       0  },
+    { "tidal-hifi",       "tidal-hifi", 	"tidal-hifi",   1 << 3,    0,           -1,       0  },
+    { "Galculator",       "galculator", 	"galculator",   0,         1,           -1,       0  },
+    { "Gucharmap",        NULL,           NULL,             0,         1,           -1,       0  },
+    { "Peek",             "peek",         NULL,             0,         1,           -1,       0  },
+    { "Tk",               "tk",           NULL,             0,         1,           -1,       0  },
+    { "Sxiv",             NULL,           NULL,             0,         1,           -1,       0  },
+    { "Nsxiv",            NULL,           NULL,             0,         1,           -1,       0  },
+    { NULL,               NULL,           "scratchpad",     0,         1,           -1,      's' },
+    { NULL,               NULL,           "sptrans",        0,         1,           -1,      's' },
 };
 
 /* layout(s) */
@@ -90,6 +94,9 @@ static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont,
 static const char *termcmd[]  = { "st", NULL };
 static const char *dwmquit[] = { "dmenu-prompt", NULL};
 
+/* First arg only serves to match against key in rules */
+static const char *scratchpadcmd[] = {"s", "st", "-t", "scratchpad", NULL};
+
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
@@ -123,6 +130,9 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_minus,  setgaps,        {.i = GAP_RESET } },
 	{ MODKEY|ShiftMask,             XK_equal,  setgaps,        {.i = GAP_TOGGLE} },
 	{ MODKEY,                       XK_F5,     xrdb,           {.v = NULL } },
+	{ MODKEY,                       XK_g,      togglescratch,  {.v = scratchpadcmd } },
+	{ MODKEY|ShiftMask,             XK_g,      removescratch,  {.v = scratchpadcmd } },
+	{ MODKEY|ControlMask,           XK_g,      setscratch,     {.v = scratchpadcmd } },
 	{ SUPERMODKEY,                  XK_s,      togglesticky,   {0} },
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
