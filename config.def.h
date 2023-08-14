@@ -76,6 +76,7 @@ static const Rule rules[] = {
     { NULL,				"spterm",		NULL,				SPTAG(0),	  0,            1,          -1 },
     { NULL,				"spfm",		    NULL,		    	SPTAG(1),	  0,            1,          -1 },
     { NULL,				"spmusic",	    "ncmpcpp",			SPTAG(2),	  1,            1,          -1 },
+    { NULL,			    "sptrans",		NULL,				SPTAG(3),	  1,            1,          -1 },
 };
 
 /* layout(s) */
