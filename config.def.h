@@ -1,5 +1,9 @@
 /* See LICENSE file for copyright and license details. */
 
+/* Constants */
+#define TERMINAL "st"
+#define TERMCLASS "St"
+
 /* appearance */
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
 static const Gap default_gap        = {.isgap = 1, .realgap = 10, .gappx = 10};
@@ -58,7 +62,7 @@ static const Rule rules[] = {
     { "Sxiv",             NULL,           NULL,             0,         1,           -1,       0  },
     { "Nsxiv",            NULL,           NULL,             0,         1,           -1,       0  },
     { NULL,               NULL,           "scratchpad",     0,         1,           -1,      's' },
-    { NULL,               NULL,           "sptrans",        0,         1,           -1,      's' },
+    { NULL,               NULL,           "sptrans",        0,         1,           -1,      'p' },
 };
 
 /* layout(s) */
@@ -91,11 +95,12 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbordercolor, "-sf", selfgcolor, NULL };
-static const char *termcmd[]  = { "st", NULL };
+static const char *termcmd[]  = { TERMINAL, NULL };
 static const char *dwmquit[] = { "dmenu-prompt", NULL};
 
 /* First arg only serves to match against key in rules */
-static const char *scratchpadcmd[] = {"s", "st", "-t", "scratchpad", NULL};
+static const char *scratchpadcmd[] = {"s", TERMINAL, "-t", "scratchpad", "-g", "120x34", NULL};
+static const char *transscratch[] = {"p", TERMINAL, "-t", "sptrans", "-g", "120x34", NULL};
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -134,6 +139,7 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_g,      removescratch,  {.v = scratchpadcmd } },
 	{ MODKEY|ControlMask,           XK_g,      setscratch,     {.v = scratchpadcmd } },
 	{ SUPERMODKEY,                  XK_s,      togglesticky,   {0} },
+	{ SUPERMODKEY,                  XK_e,      togglescratch,  {.v = transscratch } },
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
