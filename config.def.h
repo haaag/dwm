@@ -59,15 +59,17 @@ static const Rule rules[] = {
      *	WM_CLASS(STRING) = instance, class
      *	WM_NAME(STRING) = title
      */
-    /* class                instance        title           tags mask   iscentered  isfloating  monitor */
+    /* class                instance        title               tags mask   iscentered  isfloating  monitor */
     { "Gimp",               NULL,           NULL,               0,          0,          1,          -1 },
     { "Firefox",            NULL,           NULL,               1 << 8,     0,          0,          -1 },
+    { "LibreWolf",          NULL,           NULL,               1 << 8,     0,          0,          -1 },
+    { "Chromium",           NULL,           NULL,               1 << 8,     0,          0,          -1 },
     { "Tor Browser",        NULL,           NULL,               1 << 7,     0,          0,          -1 },
     { "TelegramDesktop",    NULL,           NULL,               1 << 6,     0,          0,          -1 },
     { "Signal",             NULL,           NULL,               1 << 6,     0,          0,          -1 },
     { "mpv",                NULL,           NULL,               1 << 5,     0,          0,          -1 },
-    { "tidal-hifi",         "tidal-hifi",   "tidal-hifi",       1 << 3,     0,          0,          -1 },
-    { "Galculator",         "galculator",   "galculator",       0,          1,          1,          -1 },
+    { "tidal-hifi",         "tidal-hifi",   NULL,               1 << 3,     0,          0,          -1 },
+    { "Galculator",         "galculator",   NULL,               0,          1,          1,          -1 },
     { "Gucharmap",          NULL,           NULL,               0,          1,          1,          -1 },
     { "Peek",               "peek",         NULL,               0,          1,          1,          -1 },
     { "Tk",                 "tk",           NULL,               0,          1,          1,          -1 },
@@ -128,9 +130,9 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_Return, zoom,           {0} },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
 	{ MODKEY|ShiftMask,             XK_c,      killclient,     {0} },
-	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
-	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
-	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
+	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} }, /* tile-layout */
+	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} }, /* floating-layout */
+	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} }, /* monocle-layout */
 	{ MODKEY,                       XK_o,      setlayout,      {.v = &layouts[3]} }, /* horizgrid-layout */
 	{ MODKEY,                       XK_space,  setlayout,      {0} },
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
@@ -177,4 +179,3 @@ static const Button buttons[] = {
 	{ ClkTagBar,            MODKEY,         Button1,        tag,            {0} },
 	{ ClkTagBar,            MODKEY,         Button3,        toggletag,      {0} },
 };
-
