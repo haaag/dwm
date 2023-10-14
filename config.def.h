@@ -10,14 +10,15 @@ static const Gap default_gap        = {.isgap = 1, .realgap = 10, .gappx = 10};
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { 
+static const char *fonts[]          = {
+    "Maple Mono:size=10",
     "RobotoMono Nerd Font:size=10",
     "Material:size=12",
     "FontAwesome:size=14",
     "Font Awesome 5 Free:size=14",
     "Weather Icons:size=10"
 };
-static const char dmenufont[]       = "RobotoMono Nerd Font:size=10";
+static const char dmenufont[]       = "Maple Mono:size=11";
 static const unsigned int baralpha  = 0xd0;
 static const unsigned int borderalpha = OPAQUE;
 static char normbgcolor[]           = "#222222";
@@ -63,7 +64,7 @@ static const Rule rules[] = {
     { "Gimp",               NULL,           NULL,               0,          0,          1,          -1 },
     { "Firefox",            NULL,           NULL,               1 << 8,     0,          0,          -1 },
     { "LibreWolf",          NULL,           NULL,               1 << 8,     0,          0,          -1 },
-    { "Chromium",           NULL,           NULL,               1 << 8,     0,          0,          -1 },
+    { "Chromium",           NULL,           NULL,               1 << 7,     0,          0,          -1 },
     { "Tor Browser",        NULL,           NULL,               1 << 7,     0,          0,          -1 },
     { "TelegramDesktop",    NULL,           NULL,               1 << 6,     0,          0,          -1 },
     { "Signal",             NULL,           NULL,               1 << 6,     0,          0,          -1 },
@@ -74,10 +75,13 @@ static const Rule rules[] = {
     { "Peek",               "peek",         NULL,               0,          1,          1,          -1 },
     { "Tk",                 "tk",           NULL,               0,          1,          1,          -1 },
     { "Sxiv",               NULL,           NULL,               0,          0,          1,          -1 },
+    { "Nitrogen",           NULL,           NULL,               0,          1,          1,          -1 },
     { "Nsxiv",              NULL,           NULL,               0,          0,          1,          -1 },
+    { "GoWindow",           NULL,           NULL,               0,          0,          1,          -1 },
+    { NULL,                 "screensaver",  NULL,               0,          0,          0,          -1 },
     { NULL,                 "spterm",       NULL,               SPTAG(0),   0,          1,          -1 },
     { NULL,                 "spfm",         NULL,               SPTAG(1),   0,          1,          -1 },
-    { NULL,                 "spmusic",      "ncmpcpp",          SPTAG(2),   1,          1,          -1 },
+    { NULL,                 "spollama",     NULL,               SPTAG(2),   1,          1,          -1 },
     { NULL,                 "sptrans",      NULL,               SPTAG(3),   1,          1,          -1 },
 };
 
@@ -110,7 +114,7 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbordercolor, "-sf", selfgcolor, NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-h", "22", "-m", dmenumon, "-fn", dmenufont, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbordercolor, "-sf", selfgcolor, NULL };
 static const char *termcmd[]  = { TERMINAL, NULL };
 static const char *dwmquit[] = { "dmenu-prompt", NULL};
 
