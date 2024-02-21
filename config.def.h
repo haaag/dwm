@@ -114,6 +114,8 @@ static const Layout layouts[] = {
 	{ "###",      horizgrid },
 	{ "[D]",      deck },
 	{ "|||",      col },
+	{ "|M|",      centeredmaster },
+	{ ">M>",      centeredfloatingmaster },
 };
 
 /* key definitions */
@@ -159,6 +161,8 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_o,      setlayout,      {.v = &layouts[3]} }, /* horizgrid-layout */
 	{ MODKEY,                       XK_r,      setlayout,      {.v = &layouts[4]} }, /* deck-layout */
 	{ MODKEY,                       XK_g,      setlayout,      {.v = &layouts[5]} }, /* columns-layout */
+	{ MODKEY,                       XK_u,      setlayout,      {.v = &layouts[6]} }, /* centeredmaster-layout */
+	{ MODKEY|ShiftMask,             XK_u,      setlayout,      {.v = &layouts[7]} }, /* centeredfloatingmaster-layout */
 	{ MODKEY,                       XK_space,  setlayout,      {0} },
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
