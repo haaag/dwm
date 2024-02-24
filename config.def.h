@@ -1,6 +1,6 @@
 /* See LICENSE file for copyright and license details. */
 
-/* Constants */
+/* constants */
 #define TERMINAL "st"
 #define TERMCLASS "St"
 
@@ -42,14 +42,14 @@ typedef struct {
 	const char *name;
 	const void *cmd;
 } Sp;
-const char *spcmd1[] = {TERMINAL, "-n", "spterm", "-c", "spterm", "-g", "120x34", NULL };
-const char *spcmd2[] = {TERMINAL, "-n", "spfm", "-g", "144x41", "-e", "zsh", "-c", "run-nnn.sh", NULL };
-const char *spcmd3[] = {TERMINAL, "-n", "spmusic", "-c", "spmusic", "-g", "140x30", "-e", "ncmpcpp-ueberzug", NULL};
+const char *spcmd1[] = {TERMINAL, "-n", "spterm", "-c", "spterm", "-g", "120x30", NULL };
+const char *spcmd2[] = {TERMINAL, "-n", "spfm", "-g", "120x30", "-e", "zsh", "-c", "run-nnn.sh", NULL };
+const char *spcmd3[] = {TERMINAL, "-n", "spmusic", "-c", "spmusic", "-g", "120x30", "-e", "ncmpcpp-ueberzug", NULL};
 static Sp scratchpads[] = {
 	/* name          cmd  */
 	{"spterm",      spcmd1},
 	{"spranger",    spcmd2},
-	{"keepassxc",   spcmd3},
+	{"spmusic",     spcmd3},
 };
 
 /* tagging */
@@ -81,7 +81,7 @@ static const Rule rules[] = {
     { NULL,                 "screensaver",  NULL,               0,          0,          0,          -1 },
     { NULL,                 "spterm",       NULL,               SPTAG(0),   0,          1,          -1 },
     { NULL,                 "spfm",         NULL,               SPTAG(1),   0,          1,          -1 },
-    { NULL,                 "spollama",     NULL,               SPTAG(2),   1,          1,          -1 },
+    { NULL,                 "spmusic",      "ncmpcpp",			SPTAG(2),	1,          1,          -1 },
     { NULL,                 "sptrans",      NULL,               SPTAG(3),   1,          1,          -1 },
 };
 
