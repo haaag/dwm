@@ -42,14 +42,20 @@ typedef struct {
 	const char *name;
 	const void *cmd;
 } Sp;
-const char *spcmd1[] = {TERMINAL, "-n", "spterm", "-c", "spterm", "-g", "120x30", NULL };
-const char *spcmd2[] = {TERMINAL, "-n", "spfm", "-g", "120x30", "-e", "zsh", "-c", "run-nnn.sh", NULL };
-const char *spcmd3[] = {TERMINAL, "-n", "spmusic", "-c", "spmusic", "-g", "120x30", "-e", "ncmpcpp-ueberzug", NULL};
+const char *spcmd1[] = {TERMINAL, "-n", "spterm", "-c", "spterm", "-g", "130x30", NULL };
+const char *spcmd2[] = {TERMINAL, "-n", "spfm", "-g", "130x30", "-e", "zsh", "-c", "run-nnn.sh", NULL };
+const char *spcmd3[] = {TERMINAL, "-n", "spmusic", "-c", "spmusic", "-g", "130x30", "-e", "ncmpcpp-ueberzug", NULL};
+const char *spcmd4[] = {TERMINAL, "-n", "spnews", "-t", "spnews", "-g", "130x30", "-e", "zsh",  "-c", "newsboat", NULL};
+// const char *spcmd5[] = {TERMINAL, "-n", "sptransen", "-t", "sptransen", "-g", "130x35", "-e", "zsh", "-c", "terminal-trans.sh", "en:es", NULL};
+// const char *spcmd6[] = {TERMINAL, "-n", "sptrans", "-t", "sptrans", "-g", "130x35", "-e", "zsh", "-c", "terminal-trans.sh", NULL};
 static Sp scratchpads[] = {
 	/* name          cmd  */
 	{"spterm",      spcmd1},
-	{"spranger",    spcmd2},
+	{"spfm",        spcmd2},
 	{"spmusic",     spcmd3},
+    {"spnews",      spcmd4},
+    // {"sptransen",   NULL},
+    // {"sptrans",     NULL},
 };
 
 /* tagging */
@@ -63,7 +69,8 @@ static const Rule rules[] = {
     /* class                instance        title               tags mask   iscentered  isfloating  monitor */
     { "Gimp",               NULL,           NULL,               0,          0,          1,          -1 },
     { "Firefox",            NULL,           NULL,               1 << 8,     0,          0,          -1 },
-    { "LibreWolf",          NULL,           NULL,               1 << 8,     0,          0,          -1 },
+    { "Brave-browser",      NULL,           NULL,               1 << 8,     0,          0,          -1 },
+    { "LibreWolf",          NULL,           NULL,               1 << 7,     0,          0,          -1 },
     { "Chromium",           NULL,           NULL,               1 << 7,     0,          0,          -1 },
     { "Tor Browser",        NULL,           NULL,               1 << 7,     0,          0,          -1 },
     { "TelegramDesktop",    NULL,           NULL,               1 << 6,     0,          0,          -1 },
@@ -82,7 +89,10 @@ static const Rule rules[] = {
     { NULL,                 "spterm",       NULL,               SPTAG(0),   0,          1,          -1 },
     { NULL,                 "spfm",         NULL,               SPTAG(1),   0,          1,          -1 },
     { NULL,                 "spmusic",      "ncmpcpp",			SPTAG(2),	1,          1,          -1 },
-    { NULL,                 "sptrans",      NULL,               SPTAG(3),   1,          1,          -1 },
+    { NULL,                 "spnews",       "spnews",           SPTAG(3),   0,          1,          -1 },
+    { "sptransen",          "sptransen",    NULL,               0,          1,          1,          -1 },
+    { NULL,                 "sptrans",      "term-trans.sh",    0,          1,          1,          -1 },
+    { NULL,                 "spmarks",      "spmarks",          0,          1,          1,          -1 },
 };
 
 /* layout(s) */
@@ -160,6 +170,9 @@ static const Key keys[] = {
 	{ MODKEY,            		    XK_y,  	   togglescratch,  {.ui = 0 } },
 	{ MODKEY|ShiftMask,            	XK_y,  	   togglescratch,  {.ui = 1 } },
 	{ MODKEY,            		    XK_x,      togglescratch,  {.ui = 2 } },
+	{ MODKEY|ShiftMask,            	XK_x,      togglescratch,  {.ui = 3 } },
+	// { SUPERMODKEY,            		XK_e,      togglescratch,  {.ui = 4 } },
+	// { MODKEY|ShiftMask,            	XK_e,      togglescratch,  {.ui = 5 } },
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
