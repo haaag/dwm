@@ -79,7 +79,7 @@ static const Rule rules[] = {
     { "tidal-hifi",         "tidal-hifi",   NULL,               1 << 3,     0,          0,          -1 },
     { "Galculator",         "galculator",   NULL,               0,          1,          1,          -1 },
     { "Gucharmap",          NULL,           NULL,               0,          1,          1,          -1 },
-    { "Peek",               "peek",         NULL,               0,          1,          1,          -1 },
+    { "Peek",               "peek",         NULL,               0,          0,          1,          -1 },
     { "Tk",                 "tk",           NULL,               0,          1,          1,          -1 },
     { "Sxiv",               NULL,           NULL,               0,          0,          1,          -1 },
     { "Nitrogen",           NULL,           NULL,               0,          1,          1,          -1 },
@@ -109,6 +109,7 @@ static const Layout layouts[] = {
 	{ "[M]",      monocle },
 	{ "###",      horizgrid },
 	{ "[D]",      deck },
+	{ "|||",      col },
 };
 
 /* key definitions */
@@ -153,6 +154,7 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} }, /* monocle-layout */
 	{ MODKEY,                       XK_o,      setlayout,      {.v = &layouts[3]} }, /* horizgrid-layout */
 	{ MODKEY,                       XK_r,      setlayout,      {.v = &layouts[4]} }, /* deck-layout */
+	{ MODKEY,                       XK_g,      setlayout,      {.v = &layouts[5]} }, /* columns-layout */
 	{ MODKEY,                       XK_space,  setlayout,      {0} },
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
