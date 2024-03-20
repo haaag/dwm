@@ -6,7 +6,8 @@
 
 /* appearance */
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
-static const Gap default_gap        = {.isgap = 1, .realgap = 10, .gappx = 10};
+static const int startwithgaps[]    = { 1 };	/* 1 means gaps are used by default, this can be customized for each tag */
+static const unsigned int gappx[]   = { 10 };   /* default gap between windows in pixels, this can be customized for each tag */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
@@ -46,16 +47,12 @@ const char *spcmd1[] = {TERMINAL, "-n", "spterm", "-c", "spterm", "-g", "130x30"
 const char *spcmd2[] = {TERMINAL, "-n", "spfm", "-g", "130x30", "-e", "zsh", "-c", "run-nnn.sh", NULL };
 const char *spcmd3[] = {TERMINAL, "-n", "spmusic", "-c", "spmusic", "-g", "130x30", "-e", "ncmpcpp-ueberzug", NULL};
 const char *spcmd4[] = {TERMINAL, "-n", "spnews", "-t", "spnews", "-g", "130x30", "-e", "zsh",  "-c", "newsboat", NULL};
-// const char *spcmd5[] = {TERMINAL, "-n", "sptransen", "-t", "sptransen", "-g", "130x35", "-e", "zsh", "-c", "terminal-trans.sh", "en:es", NULL};
-// const char *spcmd6[] = {TERMINAL, "-n", "sptrans", "-t", "sptrans", "-g", "130x35", "-e", "zsh", "-c", "terminal-trans.sh", NULL};
 static Sp scratchpads[] = {
 	/* name          cmd  */
 	{"spterm",      spcmd1},
 	{"spfm",        spcmd2},
 	{"spmusic",     spcmd3},
     {"spnews",      spcmd4},
-    // {"sptransen",   NULL},
-    // {"sptrans",     NULL},
 };
 
 /* tagging */
