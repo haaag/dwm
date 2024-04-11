@@ -7,19 +7,19 @@
 /* appearance */
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
 static const int startwithgaps[]    = { 1 };	/* 1 means gaps are used by default, this can be customized for each tag */
-static const unsigned int gappx[]   = { 10 };   /* default gap between windows in pixels, this can be customized for each tag */
+static const unsigned int gappx[]   = { 15 };   /* default gap between windows in pixels, this can be customized for each tag */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const char *fonts[]          = {
-    "Maple Mono:size=10",
+    "Maple Mono NF:size=10",
     "RobotoMono Nerd Font:size=10",
     "Material:size=12",
     "FontAwesome:size=14",
     "Font Awesome 5 Free:size=14",
     "Weather Icons:size=10"
 };
-static const char dmenufont[]       = "Maple Mono:size=11";
+static const char dmenufont[]       = "Maple Mono NF:size=11";
 static const unsigned int baralpha  = 0xd0;
 static const unsigned int borderalpha = OPAQUE;
 static char normbgcolor[]           = "#222222";
