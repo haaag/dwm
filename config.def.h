@@ -44,8 +44,8 @@ typedef struct {
 	const void *cmd;
 } Sp;
 const char *spcmd1[] = {TERMINAL, "-n", "spterm", "-c", "spterm", "-g", "130x30", NULL };
-const char *spcmd2[] = {TERMINAL, "-n", "spfm", "-g", "130x30", "-e", "zsh", "-c", "run-nnn.sh", NULL };
-const char *spcmd3[] = {TERMINAL, "-n", "spmusic", "-c", "spmusic", "-g", "130x30", "-e", "ncmpcpp-ueberzug", NULL};
+const char *spcmd2[] = {TERMINAL, "-n", "spfm", "-g", "120x25", "-e", "zsh", "-c", "nnn.sh", NULL };
+const char *spcmd3[] = {TERMINAL, "-n", "spmusic", "-c", "spmusic", "-g", "120x25", "-e", "ncmpcpp-ueberzug", NULL};
 const char *spcmd4[] = {TERMINAL, "-n", "spnews", "-t", "spnews", "-g", "130x30", "-e", "zsh",  "-c", "newsboat", NULL};
 static Sp scratchpads[] = {
 	/* name          cmd  */
@@ -90,6 +90,9 @@ static const Rule rules[] = {
     { "sptransen",          "sptransen",    NULL,               0,          1,          1,          -1 },
     { NULL,                 "sptrans",      "term-trans.sh",    0,          1,          1,          -1 },
     { NULL,                 "spmarks",      "spmarks",          0,          1,          1,          -1 },
+    { NULL,                 "splogs",       "splogs",           0,          1,          1,          -1 },
+    { "Display",            "display",      NULL,               0,          1,          1,          -1 },
+    { "Nsxiv",              "nsxiv",        NULL,               0,          1,          1,          -1 },
 };
 
 /* layout(s) */
@@ -166,12 +169,10 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_equal,  setgaps,        {.i = GAP_TOGGLE} },
 	{ MODKEY,                       XK_F5,     xrdb,           {.v = NULL } },
 	{ SUPERMODKEY,                  XK_s,      togglesticky,   {0} },
-	{ MODKEY,            		    XK_y,  	   togglescratch,  {.ui = 0 } },
-	{ MODKEY|ShiftMask,            	XK_y,  	   togglescratch,  {.ui = 1 } },
-	{ MODKEY,            		    XK_x,      togglescratch,  {.ui = 2 } },
-	{ MODKEY|ShiftMask,            	XK_x,      togglescratch,  {.ui = 3 } },
-	// { SUPERMODKEY,            		XK_e,      togglescratch,  {.ui = 4 } },
-	// { MODKEY|ShiftMask,            	XK_e,      togglescratch,  {.ui = 5 } },
+	{ MODKEY,            		    XK_y,  	   togglescratch,  {.ui = 0 } }, // terminal
+	{ MODKEY|ShiftMask,            	XK_y,  	   togglescratch,  {.ui = 1 } }, // nnn.sh
+	{ MODKEY,            		    XK_x,      togglescratch,  {.ui = 2 } }, // mpd
+	{ MODKEY|ShiftMask,            	XK_x,      togglescratch,  {.ui = 3 } }, // newsboat
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
