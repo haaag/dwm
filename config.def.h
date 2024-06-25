@@ -47,12 +47,14 @@ const char *spcmd1[] = {TERMINAL, "-n", "spterm", "-c", "spterm", "-g", "130x30"
 const char *spcmd2[] = {TERMINAL, "-n", "spfm", "-g", "120x25", "-e", "zsh", "-c", "nnn.sh", NULL };
 const char *spcmd3[] = {TERMINAL, "-n", "spmusic", "-c", "spmusic", "-g", "120x25", "-e", "ncmpcpp-ueberzug", NULL};
 const char *spcmd4[] = {TERMINAL, "-n", "spnews", "-t", "spnews", "-g", "130x30", "-e", "zsh",  "-c", "newsboat", NULL};
+const char *spcmd5[] = {TERMINAL, "-n", "sphtop", "-c", "sphtop", "-g", "130x30", "-e", "zsh", "-c", "htop", NULL };
 static Sp scratchpads[] = {
 	/* name          cmd  */
 	{"spterm",      spcmd1},
 	{"spfm",        spcmd2},
 	{"spmusic",     spcmd3},
     {"spnews",      spcmd4},
+    {"sphtop",      spcmd5},
 };
 
 /* tagging */
@@ -87,12 +89,14 @@ static const Rule rules[] = {
     { NULL,                 "spfm",         NULL,               SPTAG(1),   0,          1,          -1 },
     { NULL,                 "spmusic",      "ncmpcpp",			SPTAG(2),	1,          1,          -1 },
     { NULL,                 "spnews",       "spnews",           SPTAG(3),   0,          1,          -1 },
+    { NULL,                 "sphtop",       NULL,               SPTAG(4),   0,          1,          -1 },
     { "sptransen",          "sptransen",    NULL,               0,          1,          1,          -1 },
     { NULL,                 "sptrans",      "term-trans.sh",    0,          1,          1,          -1 },
     { NULL,                 "spmarks",      "spmarks",          0,          1,          1,          -1 },
     { NULL,                 "splogs",       "splogs",           0,          1,          1,          -1 },
     { "Display",            "display",      NULL,               0,          1,          1,          -1 },
     { "Nsxiv",              "nsxiv",        NULL,               0,          1,          1,          -1 },
+    { "Nsxiv",              "fontpreview",  NULL,               0,          0,          0,          -1 },
 };
 
 /* layout(s) */
@@ -128,7 +132,7 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-h", "22", "-m", dmenumon, "-fn", dmenufont, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbordercolor, "-sf", selfgcolor, NULL };
 static const char *termcmd[]  = { TERMINAL, NULL };
-static const char *dwmquit[] = { "dmenu-prompt", NULL};
+static const char *dwmquit[] = { "wmprompt", NULL};
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -173,6 +177,7 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,            	XK_y,  	   togglescratch,  {.ui = 1 } }, // nnn.sh
 	{ MODKEY,            		    XK_x,      togglescratch,  {.ui = 2 } }, // mpd
 	{ MODKEY|ShiftMask,            	XK_x,      togglescratch,  {.ui = 3 } }, // newsboat
+	{ SUPERMODKEY,            	    XK_y,      togglescratch,  {.ui = 4 } }, // htop
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
