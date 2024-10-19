@@ -3,6 +3,7 @@
 /* constants */
 #define TERMINAL "st"
 #define TERMCLASS "St"
+#define SHELL "zsh"
 
 /* appearance */
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
@@ -19,7 +20,7 @@ static const char *fonts[]          = {
     "Font Awesome 5 Free:size=14",
     "Weather Icons:size=10"
 };
-static const char dmenufont[]       = "Maple Mono NF:size=11";
+static const char dmenufont[]       = "Maple Mono NF:size=10";
 static const unsigned int baralpha  = 0xd0;
 static const unsigned int borderalpha = OPAQUE;
 static char normbgcolor[]           = "#222222";
@@ -44,10 +45,12 @@ typedef struct {
 	const void *cmd;
 } Sp;
 const char *spcmd1[] = {TERMINAL, "-n", "spterm", "-c", "spterm", "-g", "130x30", NULL };
-const char *spcmd2[] = {TERMINAL, "-n", "spfm", "-g", "120x25", "-e", "zsh", "-c", "nnn.sh", NULL };
+const char *spcmd2[] = {TERMINAL, "-n", "spfm", "-g", "120x25", "-e", SHELL, "-c", "nnn.sh", NULL };
 const char *spcmd3[] = {TERMINAL, "-n", "spmusic", "-c", "spmusic", "-g", "120x25", "-e", "ncmpcpp-ueberzug", NULL};
-const char *spcmd4[] = {TERMINAL, "-n", "spnews", "-t", "spnews", "-g", "130x30", "-e", "zsh",  "-c", "newsboat", NULL};
-const char *spcmd5[] = {TERMINAL, "-n", "sphtop", "-c", "sphtop", "-g", "130x30", "-e", "zsh", "-c", "htop", NULL };
+const char *spcmd4[] = {TERMINAL, "-n", "spnews", "-c", "spnews", "-g", "130x30", "-e", SHELL,  "-c", "newsboat", NULL};
+const char *spcmd5[] = {TERMINAL, "-n", "sphtop", "-c", "sphtop", "-g", "130x30", "-e", SHELL, "-c", "htop", NULL };
+const char *spcmd6[] = {TERMINAL, "-n", "spmarks", "-c", "spmarks", "-g", "128x24", "-e", SHELL, "-c", "gms", NULL };
+const char *spcmd7[] = {TERMINAL, "-n", "spcalc", "-f", "monospace:size=16", "-g", "50x20", "-e", "bc", "-lq", NULL };
 static Sp scratchpads[] = {
 	/* name          cmd  */
 	{"spterm",      spcmd1},
@@ -55,6 +58,8 @@ static Sp scratchpads[] = {
 	{"spmusic",     spcmd3},
     {"spnews",      spcmd4},
     {"sphtop",      spcmd5},
+    {"spmarks",     spcmd6},
+    {"spcalc",      spcmd7},
 };
 
 /* tagging */
@@ -68,7 +73,8 @@ static const Rule rules[] = {
     /* class                instance        title               tags mask   iscentered  isfloating  monitor */
     { "Gimp",               NULL,           NULL,               0,          0,          1,          -1 },
     { "Firefox",            NULL,           NULL,               1 << 8,     0,          0,          -1 },
-    { "Brave-browser",      NULL,           NULL,               1 << 8,     0,          0,          -1 },
+    { "zen-alpha",          NULL,           NULL,               1 << 8,     0,          0,          -1 },
+    { "zen-alpha",          NULL,           "About Zen Browser",1 << 8,     1,          1,          -1 },
     { "LibreWolf",          NULL,           NULL,               1 << 7,     0,          0,          -1 },
     { "Chromium",           NULL,           NULL,               1 << 7,     0,          0,          -1 },
     { "Tor Browser",        NULL,           NULL,               1 << 7,     0,          0,          -1 },
@@ -76,7 +82,7 @@ static const Rule rules[] = {
     { "Signal",             NULL,           NULL,               1 << 6,     0,          0,          -1 },
     { "mpv",                NULL,           NULL,               1 << 5,     0,          0,          -1 },
     { "tidal-hifi",         "tidal-hifi",   NULL,               1 << 3,     0,          0,          -1 },
-    { "Galculator",         "galculator",   NULL,               0,          1,          1,          -1 },
+    { "Galculator",         "galculator",   NULL,               0,          0,          1,          -1 },
     { "Gucharmap",          NULL,           NULL,               0,          1,          1,          -1 },
     { "Peek",               "peek",         NULL,               0,          0,          1,          -1 },
     { "Tk",                 "tk",           NULL,               0,          1,          1,          -1 },
@@ -85,18 +91,19 @@ static const Rule rules[] = {
     { "Nsxiv",              NULL,           NULL,               0,          0,          1,          -1 },
     { "GoWindow",           NULL,           NULL,               0,          0,          1,          -1 },
     { NULL,                 "screensaver",  NULL,               0,          0,          0,          -1 },
-    { NULL,                 "spterm",       NULL,               SPTAG(0),   0,          1,          -1 },
-    { NULL,                 "spfm",         NULL,               SPTAG(1),   0,          1,          -1 },
-    { NULL,                 "spmusic",      "ncmpcpp",			SPTAG(2),	1,          1,          -1 },
-    { NULL,                 "spnews",       "spnews",           SPTAG(3),   0,          1,          -1 },
-    { NULL,                 "sphtop",       NULL,               SPTAG(4),   0,          1,          -1 },
     { "sptransen",          "sptransen",    NULL,               0,          1,          1,          -1 },
     { NULL,                 "sptrans",      "term-trans.sh",    0,          1,          1,          -1 },
-    { NULL,                 "spmarks",      "spmarks",          0,          1,          1,          -1 },
     { NULL,                 "splogs",       "splogs",           0,          1,          1,          -1 },
     { "Display",            "display",      NULL,               0,          1,          1,          -1 },
     { "Nsxiv",              "nsxiv",        NULL,               0,          1,          1,          -1 },
     { "Nsxiv",              "fontpreview",  NULL,               0,          0,          0,          -1 },
+    { NULL,                 "spterm",       NULL,               SPTAG(0),   0,          1,          -1 },
+    { NULL,                 "spfm",         NULL,               SPTAG(1),   0,          1,          -1 },
+    { NULL,                 "spmusic",      NULL,               SPTAG(2),	1,          1,          -1 },
+    { NULL,                 "spnews",       NULL,               SPTAG(3),   0,          1,          -1 },
+    { NULL,                 "sphtop",       NULL,               SPTAG(4),   0,          1,          -1 },
+    { NULL,                 "spmarks",      NULL,               SPTAG(5),   1,          1,          -1 },
+    { TERMCLASS,            "spcalc",       NULL,               SPTAG(6),   1,          1,          -1 },
 };
 
 /* layout(s) */
@@ -182,6 +189,8 @@ static const Key keys[] = {
 	{ MODKEY,            		    XK_x,      togglescratch,  {.ui = 2 } }, // mpd
 	{ MODKEY|ShiftMask,            	XK_x,      togglescratch,  {.ui = 3 } }, // newsboat
 	{ SUPERMODKEY,            	    XK_y,      togglescratch,  {.ui = 4 } }, // htop
+	{ SUPERMODKEY,            	    XK_n,      togglescratch,  {.ui = 5 } }, // bookmarks
+	{ SUPERMODKEY,                  XK_c,      togglescratch,  {.ui = 6 } }, // spcalc
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
