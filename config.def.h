@@ -52,6 +52,7 @@ const char *spcmd5[] = {TERMINAL, "-n", "sphtop", "-c", "sphtop", "-g", "130x30"
 const char *spcmd6[] = {TERMINAL, "-n", "spmarks", "-c", "spmarks", "-g", "128x24", "-e", SHELL, "-c", "gms", NULL };
 const char *spcmd7[] = {TERMINAL, "-n", "spcalc", "-f", "monospace:size=16", "-g", "50x20", "-e", "bc", "-lq", NULL };
 const char *spcmd8[] = {TERMINAL, "-n", "spai", "-c", "spai", "-g", "130x30", "-e", SHELL, "-c", "ai.sh", NULL };
+const char *spcmd9[] = {TERMINAL, "-n", "spsf", "-g", "50x20", "-e", SHELL, "-c", "share-files", NULL };
 static Sp scratchpads[] = {
     /* name          cmd  */
     {"spterm",      spcmd1},
@@ -62,6 +63,7 @@ static Sp scratchpads[] = {
     {"spmarks",     spcmd6},
     {"spcalc",      spcmd7},
     {"spai",        spcmd8},
+    {"spsf",        spcmd9},
 };
 
 /* tagging */
@@ -92,12 +94,14 @@ static const Rule rules[] = {
     { "Nsxiv",              NULL,           NULL,               0,          0,          1,          -1 },
     { "GoWindow",           NULL,           NULL,               0,          0,          1,          -1 },
     { NULL,                 "screensaver",  NULL,               0,          0,          0,          -1 },
-    { "sptransen",          "sptransen",    NULL,               0,          1,          1,          -1 },
-    { NULL,                 "sptrans",      "term-trans.sh",    0,          1,          1,          -1 },
     { NULL,                 "splogs",       "splogs",           0,          1,          1,          -1 },
     { "Display",            "display",      NULL,               0,          1,          1,          -1 },
     { "Nsxiv",              "nsxiv",        NULL,               0,          1,          1,          -1 },
     { "Nsxiv",              "fontpreview",  NULL,               0,          0,          0,          -1 },
+    { "Dragon-drop",        "dragon-drop",  NULL,               ~0,         0,          0,          -1 },
+    { "sptransen",          "sptransen",    NULL,               0,          1,          1,          -1 },
+    { NULL,                 "sptrans",      "term-trans.sh",    0,          1,          1,          -1 },
+    // scratchpads
     { NULL,                 "spterm",       NULL,               SPTAG(0),   0,          1,          -1 },
     { NULL,                 "spfm",         NULL,               SPTAG(1),   0,          1,          -1 },
     { NULL,                 "spmusic",      NULL,               SPTAG(2),   1,          1,          -1 },
@@ -106,6 +110,7 @@ static const Rule rules[] = {
     { NULL,                 "spmarks",      NULL,               SPTAG(5),   1,          1,          -1 },
     { TERMCLASS,            "spcalc",       NULL,               SPTAG(6),   1,          1,          -1 },
     { NULL,                 "spai",         NULL,               SPTAG(7),   0,          1,          -1 },
+    { NULL,                 "spsf",         NULL,               SPTAG(8),   0,          1,          -1 },
 };
 
 /* layout(s) */
@@ -194,6 +199,7 @@ static const Key keys[] = {
     { SUPERMODKEY,                  XK_n,       togglescratch,  {.ui = 5 } }, // bookmarks
     { SUPERMODKEY,                  XK_c,       togglescratch,  {.ui = 6 } }, // spcalc
     { SUPERMODKEY,                  XK_i,       togglescratch,  {.ui = 7 } }, // spai
+    { SUPERMODKEY,                  XK_o,       togglescratch,  {.ui = 8 } }, // spsf
     TAGKEYS(                        XK_1,                      0)
     TAGKEYS(                        XK_2,                      1)
     TAGKEYS(                        XK_3,                      2)
