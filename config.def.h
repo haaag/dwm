@@ -13,14 +13,14 @@ static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const char *fonts[]          = {
-    "Maple Mono NF:size=10",
-    "RobotoMono Nerd Font:size=10",
-    "Material:size=12",
-    "FontAwesome:size=14",
-    "Font Awesome 5 Free:size=14",
-    "Weather Icons:size=10"
+    "MapleMono NF:size=10:antialias=true:autohint=true",
+    "RobotoMono Nerd Font:size=10:antialias=true:autohint=true",
+    "Material:size=12:antialias=true:autohint=true",
+    "FontAwesome:size=14:antialias=true:autohint=true",
+    "Font Awesome 5 Free:size=14:antialias=true:autohint=true",
+    "Weather Icons:size=10:antialias=true:autohint=true"
 };
-static const char dmenufont[]       = "Maple Mono NF:size=10";
+static const char dmenufont[]       = "Maple Mono NF:size=10:antialias=true:autohint=true";
 static const unsigned int baralpha  = 0xd0;
 static const unsigned int borderalpha = OPAQUE;
 static char normbgcolor[]           = "#222222";
@@ -44,15 +44,17 @@ typedef struct {
     const char *name;
     const void *cmd;
 } Sp;
-const char *spcmd1[] = {TERMINAL, "-n", "spterm", "-c", "spterm", "-g", "130x30", NULL };
+const char *spcmd1[] = {TERMINAL, "-n", "spterm", "-c", "spterm", "-g", "110x30", NULL };
 const char *spcmd2[] = {TERMINAL, "-n", "spfm", "-g", "120x25", "-e", SHELL, "-c", "nnn.sh", NULL };
 const char *spcmd3[] = {TERMINAL, "-n", "spmusic", "-c", "spmusic", "-g", "120x25", "-e", "ncmpcpp-ueberzug", NULL};
 const char *spcmd4[] = {TERMINAL, "-n", "spnews", "-c", "spnews", "-g", "130x30", "-e", SHELL,  "-c", "newsboat", NULL};
 const char *spcmd5[] = {TERMINAL, "-n", "sphtop", "-c", "sphtop", "-g", "130x30", "-e", SHELL, "-c", "htop", NULL };
-const char *spcmd6[] = {TERMINAL, "-n", "spmarks", "-c", "spmarks", "-g", "128x24", "-e", SHELL, "-c", "gms", NULL };
-const char *spcmd7[] = {TERMINAL, "-n", "spcalc", "-f", "monospace:size=16", "-g", "50x20", "-e", "bc", "-lq", NULL };
-const char *spcmd8[] = {TERMINAL, "-n", "spai", "-c", "spai", "-g", "130x30", "-e", SHELL, "-c", "ai.sh", NULL };
+const char *spcmd6[] = {TERMINAL, "-n", "spmarks", "-c", "spmarks", "-g", "110x22", "-e", SHELL, "-c", "gms", NULL };
+const char *spcmd7[] = {TERMINAL, "-n", "spcalc", "-f", "monospace:size=16", "-g", "28x8", "-e", "bc", "-lq", NULL };
+const char *spcmd8[] = {TERMINAL, "-n", "spai", "-c", "spai", "-g", "130x30", "-e", SHELL, "-c", "ollama.sh", NULL };
 const char *spcmd9[] = {TERMINAL, "-n", "spsf", "-g", "50x20", "-e", SHELL, "-c", "share-files", NULL };
+const char *spcmd10[] = {TERMINAL, "-n", "spsf", "-g", "50x20", "-e", SHELL, "-c", "share-files --send", NULL };
+const char *spcmd11[] = {TERMINAL, "-n", "spvim", "-g", "105x28", "-e", SHELL, "-c", "pad", NULL };
 static Sp scratchpads[] = {
     /* name          cmd  */
     {"spterm",      spcmd1},
@@ -64,6 +66,8 @@ static Sp scratchpads[] = {
     {"spcalc",      spcmd7},
     {"spai",        spcmd8},
     {"spsf",        spcmd9},
+    {"spsf",        spcmd10},
+    {"spvim",       spcmd11},
 };
 
 /* tagging */
@@ -76,11 +80,12 @@ static const Rule rules[] = {
     /* class                instance        title               tags mask   iscentered  isfloating  monitor */
     { "Gimp",               NULL,           NULL,               0,          0,          1,          -1 },
     { "Firefox",            NULL,           NULL,               1 << 8,     0,          0,          -1 },
-    { "zen-alpha",          NULL,           NULL,               1 << 8,     0,          0,          -1 },
-    { "zen-alpha",          NULL,           "About Zen Browser",1 << 8,     1,          1,          -1 },
+    { "zen",                NULL,           NULL,               1 << 8,     0,          0,          -1 },
+    { "zen",                NULL,           "About Zen Browser",1 << 8,     1,          1,          -1 },
     { "LibreWolf",          NULL,           NULL,               1 << 7,     0,          0,          -1 },
     { "Chromium",           NULL,           NULL,               1 << 7,     0,          0,          -1 },
     { "Tor Browser",        NULL,           NULL,               1 << 7,     0,          0,          -1 },
+    { "Tor Browser",        NULL,           "About Tor Browser",1 << 7,     1,          1,          -1 },
     { "TelegramDesktop",    NULL,           NULL,               1 << 6,     0,          0,          -1 },
     { "Signal",             NULL,           NULL,               1 << 6,     0,          0,          -1 },
     { "mpv",                NULL,           NULL,               1 << 5,     0,          0,          -1 },
@@ -101,6 +106,8 @@ static const Rule rules[] = {
     { "Dragon-drop",        "dragon-drop",  NULL,               ~0,         0,          0,          -1 },
     { "sptransen",          "sptransen",    NULL,               0,          1,          1,          -1 },
     { NULL,                 "sptrans",      "term-trans.sh",    0,          1,          1,          -1 },
+    { "spfloat",            "spfloat",      NULL,               0,          1,          1,          -1 },
+    { "sppass",             "sppass",      NULL,               0,          1,          1,          -1 },
     // scratchpads
     { NULL,                 "spterm",       NULL,               SPTAG(0),   0,          1,          -1 },
     { NULL,                 "spfm",         NULL,               SPTAG(1),   0,          1,          -1 },
@@ -111,6 +118,8 @@ static const Rule rules[] = {
     { TERMCLASS,            "spcalc",       NULL,               SPTAG(6),   1,          1,          -1 },
     { NULL,                 "spai",         NULL,               SPTAG(7),   0,          1,          -1 },
     { NULL,                 "spsf",         NULL,               SPTAG(8),   0,          1,          -1 },
+    { NULL,                 "spsf",         NULL,               SPTAG(9),   0,          1,          -1 },
+    { NULL,                 "spvim",        NULL,               SPTAG(10),  1,          1,          -1 },
 };
 
 /* layout(s) */
@@ -146,7 +155,7 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-h", "22", "-m", dmenumon, "-fn", dmenufont, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbordercolor, "-sf", selfgcolor, NULL };
+static const char *dmenucmd[] = { "dmenu-run", "-h", "22", "-m", dmenumon, "-fn", dmenufont, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbordercolor, "-sf", selfgcolor, NULL };
 static const char *termcmd[]  = { TERMINAL, NULL };
 static const char *dwmquit[] = { "wmprompt", NULL};
 
@@ -195,11 +204,13 @@ static const Key keys[] = {
     { MODKEY|ShiftMask,             XK_y,       togglescratch,  {.ui = 1 } }, // nnn.sh
     { MODKEY,                       XK_x,       togglescratch,  {.ui = 2 } }, // mpd
     { MODKEY|ShiftMask,             XK_x,       togglescratch,  {.ui = 3 } }, // newsboat
-    { SUPERMODKEY,                  XK_y,       togglescratch,  {.ui = 4 } }, // htop
+    { SUPERMODKEY,                  XK_y,       togglescratch,  {.ui = 10 } }, // spvim
+    { SUPERMODKEY|ShiftMask,        XK_y,       togglescratch,  {.ui = 4 } }, // sphtop
     { SUPERMODKEY,                  XK_n,       togglescratch,  {.ui = 5 } }, // bookmarks
     { SUPERMODKEY,                  XK_c,       togglescratch,  {.ui = 6 } }, // spcalc
     { SUPERMODKEY,                  XK_i,       togglescratch,  {.ui = 7 } }, // spai
     { SUPERMODKEY,                  XK_o,       togglescratch,  {.ui = 8 } }, // spsf
+    { SUPERMODKEY|ShiftMask,        XK_o,       togglescratch,  {.ui = 9 } }, // spsf localsend
     TAGKEYS(                        XK_1,                      0)
     TAGKEYS(                        XK_2,                      1)
     TAGKEYS(                        XK_3,                      2)
